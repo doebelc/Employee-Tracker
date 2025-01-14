@@ -30,13 +30,26 @@ app.post('/api/new-department', async ({ body }, res) => {
 });
 
 
-app.get('/api/department/:id', (_req, res) => {
-    const sql = 'SELECT id, movie_name AS title FROM movies';
+app.get('/api/department/:id', async (_req, res) => {
+
+    const sql = 'SELECT id, department_name AS title FROM departments';
+
+    try {
+        const result = await pool.query(sql);
+        const { rows } = result;
+        res.json({
+            message: 'Success',
+            data: rows,
+        });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
 });
 
 
-app.delete('/api/movie/:id', (req, res) => {
-    const sql = 'Delete FROM movies WHERE id = $1';
+
+app.delete('/api/departments/:id', (req, res) => {
+    const sql = 'Delete FROM departments WHERE id = $1';
     const params = [req.params.id];
 });
 
