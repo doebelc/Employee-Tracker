@@ -14,7 +14,7 @@
   "description": "",
   "dependencies": {
     "dotenv": "^16.4.7",
-    "inquirer": "^8.2.4",
+    "inquirer": "^12.3.2",
     "pg": "^8.13.1"
   },
   "devDependencies": {
