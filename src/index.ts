@@ -7,7 +7,7 @@ async function main(): Promise<void> {
     await connectToDb();
 
     try {
-        const answers: { action: string } = await inquirer.prompt([
+        const answers = await inquirer.prompt([
             {
                 type: 'list',
                 name: 'action',
@@ -87,8 +87,6 @@ async function viewAllRoles(pool: Pool): Promise<void> {
         console.log(roles);
     } catch (error) {
         console.error('Error fetching role data:', error);
-    } finally {
-        await pool.end();
     }
 }
 
@@ -103,8 +101,6 @@ async function viewAllDepartments(pool: Pool): Promise<void> {
         console.log(departments); // Display the department data
     } catch (error) {
         console.error('Error fetching department data:', error);
-    } finally {
-        await pool.end(); // Close the pool connection when done
     }
 }
 
@@ -113,6 +109,7 @@ viewAllDepartments(pool);
 
 // FUNCTION TO ADD AN EMPLOYEE
 interface Employee {
+    id: number;
     firstName: string;
     lastName: string;
     roleId: number;
@@ -149,6 +146,7 @@ async function addEmployee(pool: Pool): Promise<void> {
         ]);
 
         const employee: Employee = {
+            id: 0,
             firstName,
             lastName,
             roleId: Number(roleId),
