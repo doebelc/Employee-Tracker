@@ -1,6 +1,6 @@
 import { pool, connectToDb } from './connection.js';
 import inquirer from 'inquirer';
-import { Pool, PoolClient } from 'pg';
+import { Pool } from 'pg';
 
 
 async function main(): Promise<void> {
